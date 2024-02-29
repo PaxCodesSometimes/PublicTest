@@ -40,4 +40,20 @@ public class Addon extends MeteorAddon {
     public String getPackage() {
         return "com.example.addon";
     }
+
+    @Override
+    public GithubRepo getRepo() {
+        return new GithubRepo("PaxCodesSometimes", "PublicTest", "master");
+    }
+
+    @Override
+    public String getCommit() {
+        String commit = FabricLoader
+            .getInstance()
+            .getModContainer("addon-template")
+            .get().getMetadata()
+            .getCustomValue("github:sha")
+            .getAsString();
+        return commit.isEmpty() ? null : commit.trim();
+    }
 }
